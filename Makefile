@@ -1,7 +1,9 @@
 KERNELDIR = /lib/modules/$(shell uname -r)/build
 
-obj-m := hello.o \
-	schar.o
+obj-m := lm.o
+lm-objs := schar.o
+
+
 CFLAG := -Wall
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
