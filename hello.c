@@ -11,9 +11,15 @@
 #endif
 */
 
+/* system header */
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
+#include <linux/fs.h>
+
+
+/* project header */
+#include "schar.h"
 
 /* define */
 #define DEBUG
@@ -25,19 +31,23 @@
 #endif
 
 /* Constants */
-#define SCHAR_MAJOR 50
+#define SCHAR_MAJOR 250
 
 char *schar_name;
 
 static int hello_init(void)
 {
-  int res;
+  int res = 0;
   printk(KERN_ALERT "Hello World.\n");
 
   if (schar_name == NULL)
     schar_name = "schar";
   
-  res = register_chrdev(SCHAR_MAJOR, schar_name, &schar_fops);
+  //res = register_chrdev((unsigned int)SCHAR_MAJOR, (const char*)schar_name, &schar_fops);
+
+  res = register_chrdev(SCHAR_MAJOR,
+			schar_name,
+			&schar_fops);
   if (res) {
     MSG("can't register device with kernel\n");
   }
