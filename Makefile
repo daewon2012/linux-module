@@ -1,12 +1,15 @@
 KERNELDIR = /lib/modules/$(shell uname -r)/build
 
-obj-m := hello.o
+obj-m := lm.o
+lm-objs := schar.o
 
+
+CFLAG := -Wall
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
 
 default:
-	$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
+	$(MAKE) $(CFLAG) -C $(KDIR) SUBDIRS=$(PWD) modules
 
 clean:
 	rm -rf *.ko
